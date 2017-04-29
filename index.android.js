@@ -10,7 +10,8 @@ import {
   StyleSheet,
   Text,
   View,
-  ListView
+  ListView,
+  Image
 } from 'react-native';
 
 import axios from 'axios';
@@ -33,12 +34,26 @@ export default class movieDemo extends Component {
 
   }
 
+  _renderMovie (item) {
+    return (
+      <View style={{flex: 1, flexDirection: 'row', borderWidth: 0.2, borderBottomColor: 'gray'}}>
+        <View style={{flex: 0.3, padding: 2}}>
+          <Image source={{uri: item.medium_cover_image}} style={{width: 100, height: 150, borderRadius: 2}}/>
+        </View>
+        <View style={{flex: 0.7, paddingRight: 5}}>
+          <Text> {item.title_long} - {item.mpa_rating}</Text>
+          <Text numberOfLines={5}> {item.description_full} </Text>
+        </View>
+      </View>
+    )
+  }
+
   render() {
     return (
       <ListView
-        enableEmptySections={false}
+        enableEmptySections={true}
         dataSource={this.state.dataSource}
-        renderRow={(rowData) => <Text>Title: {rowData.title} - Rating: {rowData.rating}</Text>}
+        renderRow={(rowData) => this._renderMovie(rowData)}
       />
     );
   }
