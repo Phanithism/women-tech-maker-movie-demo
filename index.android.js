@@ -15,6 +15,7 @@ import {
 } from 'react-native';
 
 import axios from 'axios';
+import StarRating from 'react-native-star-rating';
 
 export default class movieDemo extends Component {
 
@@ -40,9 +41,16 @@ export default class movieDemo extends Component {
         <View style={{flex: 0.3, padding: 2}}>
           <Image source={{uri: item.medium_cover_image}} style={{width: 100, height: 150, borderRadius: 2}}/>
         </View>
-        <View style={{flex: 0.7, paddingRight: 5}}>
-          <Text> {item.title_long} - {item.mpa_rating}</Text>
-          <Text numberOfLines={5}> {item.description_full} </Text>
+        <View style={{flex: 0.7, flexDirection: 'column', paddingRight: 5}}>
+          <View style={{flex: 0.3}}>
+            <Text style={{fontSize: 14, fontWeight: 'bold'}}> {item.title_long} - {item.mpa_rating}</Text>
+          </View>
+          <View style={{flex: 0.5}}>
+            <Text numberOfLines={5}> {item.description_full} </Text>
+          </View>
+          <View style={{paddingRight: 120}}>
+            <StarRating starSize={25} disabled={true} rating={item.rating} starColor={'#D4AF37'}/>
+          </View>
         </View>
       </View>
     )
